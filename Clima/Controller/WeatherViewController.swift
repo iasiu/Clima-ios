@@ -34,10 +34,6 @@ class WeatherViewController: UIViewController {
         searchTextField.delegate = self
     }
     
-    
-    @IBAction func findLocationPressed(_ sender: UIButton) {
-        locationManager.requestLocation()
-    }
 }
 
 //MARK: - UITextFieldDelegate
@@ -94,7 +90,6 @@ extension WeatherViewController: WeatherManagerDelegate {
 
 extension WeatherViewController: CLLocationManagerDelegate {
     
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             locationManager.stopUpdatingLocation()
@@ -106,5 +101,10 @@ extension WeatherViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
+    }
+    
+    @IBAction func findLocationPressed(_ sender: UIButton) {
+        locationManager.requestLocation()
+        searchTextField.endEditing(true)
     }
 }
